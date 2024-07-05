@@ -72,4 +72,14 @@ int main() {
     for (int i = 0; i < h_out.elementCount; ++i) {
         std::cout << h_out.data[i] << std::endl;
     }
+
+    // Free host memory
+    delete[] h_myStruct.arrayA.data;
+    delete[] h_myStruct.arrayB.data;
+    delete[] h_out.data;
+
+    // Free device memory
+    CUDA_CHECK_ERROR(cudaFree(d_myStruct.arrayA.data));
+    CUDA_CHECK_ERROR(cudaFree(d_myStruct.arrayB.data));
+    CUDA_CHECK_ERROR(cudaFree(d_out.data));
 }
